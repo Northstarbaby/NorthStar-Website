@@ -3,415 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Hamburg International Virtual Airlines — a fictional Roblox aviation project based at Hamburg (HAM).">
-<title>Hamburg International • Virtual Airlines</title>
+<meta name="description" content="Hamburg International Virtual Airlines — fictional Roblox airline based at Suvarnabhumi (VTBS).">
+<title>Hamburg International | Book a flight</title>
 <style>
 :root{
-  --bg:#f5f8fc;--card:#fff;--ink:#102033;--muted:#66758a;--line:#dfe6ef;
-  --accent:#0877d1;--accent2:#005ca8;--dark:#071522;--good:#17864b;
-  --shadow:0 18px 50px rgba(16,32,51,.10);--radius:22px;
+ --navy:#071521;--navy2:#0d2435;--ink:#102436;--muted:#65778a;--line:#dbe4ec;
+ --bg:#f4f7fa;--card:#fff;--blue:#0878d1;--blue2:#005ba5;--gold:#cda34d;
+ --green:#17834c;--red:#bd3e3e;--shadow:0 22px 65px rgba(10,31,48,.12);--r:22px
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.navin{max-width:1180px;margin:auto;display:flex;align-items:center;gap:24px;padding:15px 20px}
-.logo{font-weight:900;letter-spacing:-.04em;font-size:20px;white-space:nowrap}
-.logo span{color:var(--accent)}
-.navlinks{display:flex;gap:6px;align-items:center;flex:1}
-.navlinks button,.mobilebtn{background:transparent;border:0;padding:10px 12px;color:#415166;border-radius:10px}
-.navlinks button:hover,.mobilebtn:hover{background:#eef5fc;color:var(--accent)}
-.primary{background:var(--accent)!important;color:white!important;border:0!important;border-radius:12px;padding:11px 17px!important;font-weight:800}
-.primary:hover{background:var(--accent2)!important}
-.mobilebtn{display:none}
-.container{max-width:1180px;margin:auto;padding:0 20px}
-.hero{min-height:600px;display:grid;place-items:center;position:relative;overflow:hidden;color:white;background:
-linear-gradient(90deg,rgba(3,18,32,.82),rgba(3,18,32,.36)),
-url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=85") center/cover}
-.hero:after{content:"";position:absolute;inset:auto 0 0;height:130px;background:linear-gradient(transparent,var(--bg))}
-.hero-inner{position:relative;z-index:2;max-width:1180px;width:100%;padding:90px 20px 120px}
-.eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#bfe3ff}
-h1{font-size:clamp(48px,8vw,88px);line-height:.95;letter-spacing:-.065em;margin:16px 0 20px;max-width:800px}
-.hero p{font-size:19px;line-height:1.65;max-width:700px;color:#e6f0f8}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.secondary{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:12px;padding:12px 18px;font-weight:800}
-.secondary:hover{background:rgba(255,255,255,.2)}
-.searchbox{margin-top:-70px;position:relative;z-index:5;background:var(--card);box-shadow:var(--shadow);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-.searchhead{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}
-.searchhead h2{margin:0;font-size:22px}
-.muted{color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.field label{display:block;font-size:12px;font-weight:800;color:#5c6b7d;margin:0 0 7px}
-.field input,.field select{width:100%;border:1px solid var(--line);background:#fbfcfe;padding:13px 12px;border-radius:11px;outline:none;color:var(--ink)}
-.field input:focus,.field select:focus{border-color:#72b5e8;box-shadow:0 0 0 3px #eaf5ff}
-section{padding:80px 0}
-.section-title{font-size:38px;letter-spacing:-.045em;margin:0 0 10px}
-.section-sub{color:var(--muted);max-width:700px;line-height:1.7;margin-bottom:28px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 35px rgba(16,32,51,.05)}
-.route{transition:.2s}
-.route:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.route .num{font-size:12px;color:var(--accent);font-weight:900}
-.route h3{margin:9px 0 4px}
-.route p{margin:0;color:var(--muted);font-size:14px}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.feature .icon{font-size:28px}
-.feature h3{margin:12px 0 7px}
-.feature p{color:var(--muted);line-height:1.6;margin:0}
-.fleet{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
-.fleet-photo{min-height:350px;border-radius:var(--radius);background:url("https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=1200&q=85") center/cover}
-.fleet-copy{background:var(--dark);color:white;border-radius:var(--radius);padding:36px}
-.fleet-copy p{color:#bdc9d4;line-height:1.7}
-.atrfleet{margin-top:24px}
-.atr-photo{min-height:350px;border-radius:var(--radius);background:
-linear-gradient(90deg,rgba(3,18,32,.08),rgba(3,18,32,.05)),
-url("https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1200&q=85") center/cover}
-.regional-banner{margin-top:18px;border:1px solid #cfe5f7;background:linear-gradient(135deg,#eef8ff,#fff);border-radius:18px;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.regional-banner h3{margin:4px 0 6px;font-size:24px}
-.regional-banner p{margin:0;color:var(--muted);max-width:680px;line-height:1.5}
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.pill{border:1px solid #314250;padding:8px 11px;border-radius:999px;color:#d8e2ea;font-size:13px}
-.hidden{display:none!important}
-.modal{position:fixed;inset:0;background:rgba(3,13,23,.62);z-index:50;display:none;align-items:center;justify-content:center;padding:20px;overflow:auto}
-.modal.show{display:flex}
-.panel{background:#fff;border-radius:24px;width:min(1040px,100%);max-height:92vh;overflow:auto;box-shadow:0 30px 90px rgba(0,0,0,.25)}
-.panelhead{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;z-index:3}
-.panelhead h2{margin:0}
-.close{border:0;background:#eef3f7;border-radius:50%;width:38px;height:38px;font-size:20px}
-.steps{display:flex;gap:7px;padding:18px 24px 0;flex-wrap:wrap}
-.step{padding:8px 12px;border-radius:999px;background:#edf2f6;color:#738093;font-size:12px;font-weight:900}
-.step.active{background:#dff0ff;color:#0068b8}
-.modalbody{padding:24px}
-.flight-list{display:grid;gap:12px}
-.flight{border:1px solid var(--line);border-radius:15px;padding:17px;display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center}
-.flight:hover{border-color:#8fc7ef}
-.flight h3{margin:0 0 4px}.flight p{margin:0;color:var(--muted);font-size:14px}
-.badge{display:inline-block;background:#edf7f1;color:var(--good);padding:5px 8px;border-radius:8px;font-size:11px;font-weight:900}
-.cabins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
-.cabin{border:2px solid var(--line);border-radius:15px;background:#fff;padding:16px;text-align:left}
-.cabin.active{border-color:var(--accent);background:#f3faff}
-.cabin h3{margin:0 0 5px}.cabin p{margin:0;color:var(--muted);font-size:13px}
-.seatmap{background:#f1f5f8;border-radius:20px;padding:24px;overflow:auto}
-.seatgrid{display:grid;grid-template-columns:repeat(10,34px);gap:7px;min-width:405px;justify-content:center}
-.seat{width:34px;height:34px;border:1px solid #aebbc8;border-radius:8px;background:#fff;font-size:10px}
-.seat:hover{border-color:var(--accent)}
-.seat.selected{background:var(--accent);color:white;border-color:var(--accent)}
-.seat.taken{background:#ccd5de;color:#8793a0;cursor:not-allowed}
-.aisle{width:14px}
-.seatlegend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:14px}
-.dot{display:inline-block;width:12px;height:12px;border-radius:4px;background:#fff;border:1px solid #aebbc8;vertical-align:-2px;margin-right:4px}
-.dot.sel{background:var(--accent);border-color:var(--accent)}.dot.taken{background:#ccd5de}
-.passenger{border:1px solid var(--line);border-radius:15px;padding:17px;margin-bottom:12px}
-.passenger h3{margin:0 0 12px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.review{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.reviewbox{border:1px solid var(--line);border-radius:15px;padding:18px}
-.reviewbox h3{margin-top:0}
-.confirm{text-align:center;padding:30px}
-.confirm .check{font-size:55px;color:var(--good)}
-.ref{font-size:34px;font-weight:950;letter-spacing:.08em}
-.boarding{background:#102033;color:white;border-radius:20px;padding:25px;display:grid;grid-template-columns:1fr auto;gap:20px}
-.boarding .label{font-size:11px;color:#9fb0c0;text-transform:uppercase;letter-spacing:.1em}
-.boarding strong{font-size:22px}
-.manage{max-width:650px;margin:auto}
-.notice{padding:12px 14px;background:#fff8e6;border:1px solid #f1dfac;border-radius:11px;color:#765a13;font-size:13px;margin-bottom:14px}
-footer{background:#071522;color:white;padding:55px 0}
-.footergrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}
-footer p{color:#aebdca;line-height:1.65}
-footer a{color:#d9ecfa}
-.copyright{border-top:1px solid #233443;margin-top:35px;padding-top:20px;color:#8293a2;font-size:12px}
-.toast{position:fixed;bottom:24px;right:24px;background:#102033;color:#fff;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);z-index:100;display:none}
-.toast.show{display:block}
-@media(max-width:900px){
- .navlinks{display:none}.mobilebtn{display:block;margin-left:auto}
- .grid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.features{grid-template-columns:1fr}
- .fleet{grid-template-columns:1fr}.footergrid{grid-template-columns:1fr}.review{grid-template-columns:1fr}
-}
-@media(max-width:600px){
- h1{font-size:52px}.grid,.cards,.cabins,.two{grid-template-columns:1fr}
- .hero{min-height:570px}.searchbox{margin-top:-40px}.searchhead{display:block}
- section{padding:60px 0}.panel{border-radius:18px}.modalbody{padding:17px}
-}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.navin{max-width:1280px;margin:auto;padding:13px 22px;display:flex;align-items:center;gap:26px}
+.logo{font-weight:950;font-size:20px;letter-spacing:-.04em;white-space:nowrap}.logo i{font-style:normal;color:var(--blue)}
+.navlinks{display:flex;gap:4px;align-items:center;flex:1}.navlinks button,.mobile{border:0;background:transparent;padding:10px 12px;border-radius:10px;color:#44566a}
+.navlinks button:hover{background:#eef6fd;color:var(--blue)}
+.primary{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:850;box-shadow:0 8px 22px rgba(8,120,209,.18)}
+.primary:hover{background:var(--blue2);transform:translateY(-1px)}
+.secondary{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 17px;font-weight:800}
+.mobile{display:none;margin-left:auto}
+.hero{min-height:650px;color:#fff;position:relative;overflow:hidden;background:
+ linear-gradient(90deg,rgba(3,17,29,.9),rgba(3,17,29,.62) 48%,rgba(3,17,29,.18)),
+ url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2200&q=90") center/cover}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(transparent,var(--bg))}
+.heroIn{max-width:1280px;margin:auto;padding:105px 22px 155px;position:relative;z-index:2}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#aeddff}
+.hero .eyebrow{display:inline-flex;padding:9px 13px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);border-radius:999px}
+h1{font-size:clamp(48px,7vw,86px);line-height:.94;letter-spacing:-.07em;max-width:850px;margin:18px 0}
+.hero p{font-size:19px;line-height:1.65;color:#e3edf4;max-width:720px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.container{max-width:1280px;margin:auto;padding:0 22px}
+.searchCard{position:relative;z-index:5;margin:-82px auto 0;max-width:1180px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:25px;box-shadow:var(--shadow)}
+.searchTop{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}
+.searchTop h2{margin:0;font-size:24px;letter-spacing:-.035em}.hub{padding:8px 11px;border-radius:999px;background:#eaf6ff;color:#0068b8;font-size:11px;font-weight:900}
+.tabs{display:flex;gap:6px;margin-bottom:18px}.tab{border:1px solid transparent;background:#f0f4f7;padding:10px 14px;border-radius:10px;font-weight:850;color:#607083}.tab.active{background:#eaf5ff;color:#0068b8;border-color:#bfe0f5}
+.searchGrid{display:grid;grid-template-columns:1.15fr 1.15fr .9fr .9fr .75fr;gap:10px}
+.field label{display:block;font-size:11px;font-weight:900;letter-spacing:.05em;color:#68798b;margin-bottom:7px}.field input,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:11px;background:#fbfdff;color:var(--ink);outline:none}
+.field input:focus,.field select:focus{border-color:#7bb9e6;box-shadow:0 0 0 3px #e9f5fd}
+.swap{position:absolute;left:calc(23% - 17px);top:125px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 5px 16px #0000000e;font-weight:900;color:var(--blue)}
+.searchAction{margin-top:13px;display:flex;justify-content:space-between;align-items:center;gap:15px}.fine{font-size:12px;color:var(--muted)}
+section{padding:90px 0}.sectionTitle{font-size:44px;letter-spacing:-.055em;margin:0 0 10px}.sectionSub{color:var(--muted);line-height:1.7;max-width:730px;margin:0 0 28px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px;box-shadow:0 8px 28px rgba(15,40,60,.045)}
+.route{position:relative;overflow:hidden;transition:.2s}.route:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.route:after{content:"→";position:absolute;right:20px;top:20px;color:#9cb0c0;font-size:22px}
+.route .num{font-size:11px;font-weight:950;letter-spacing:.1em;color:var(--blue)}.route h3{margin:10px 0 5px}.route p{margin:0;color:var(--muted);font-size:13px}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:25px}.photo{min-height:400px;border-radius:25px;background:url("https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=1400&q=88") center/cover;box-shadow:var(--shadow)}
+.dark{background:linear-gradient(145deg,#071521,#123a57);color:#fff;border-radius:25px;padding:38px;box-shadow:var(--shadow)}.dark p{color:#b9c8d4;line-height:1.7}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.pill{border:1px solid #ffffff2e;border-radius:999px;padding:8px 11px;color:#d9e6ee;font-size:12px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.feature .ico{font-size:28px}.feature h3{margin:12px 0 6px}.feature p{color:var(--muted);line-height:1.65;margin:0}
+.regional{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(135deg,#edf8ff,#fff);border:1px solid #cfe5f5;border-radius:21px;padding:24px}.regional h3{margin:4px 0}.regional p{margin:0;color:var(--muted)}
+footer{background:#071521;color:#fff;padding:55px 0}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:35px}.foot p{color:#a9bac7;line-height:1.65}.foot a{color:#d8eaf6}.copyright{border-top:1px solid #233544;margin-top:32px;padding-top:20px;color:#81929f;font-size:11px}
+.modal{position:fixed;inset:0;background:#03111dcc;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}
+.panel{width:min(1160px,100%);max-height:94vh;overflow:auto;background:#fff;border-radius:28px;box-shadow:0 40px 120px #0005}.panelHead{position:sticky;top:0;z-index:4;background:#fff;border-bottom:1px solid var(--line);padding:19px 25px;display:flex;justify-content:space-between;align-items:center}.panelHead h2{margin:0}.close{border:0;background:#eef3f7;border-radius:50%;width:38px;height:38px;font-size:20px}
+.steps{display:flex;gap:7px;flex-wrap:wrap;padding:17px 25px 0}.step{padding:8px 11px;border-radius:999px;background:#edf2f5;color:#788797;font-size:11px;font-weight:900}.step.active{background:#e4f3ff;color:#0068b8;box-shadow:0 0 0 3px #0878d10f}
+.body{padding:25px}.muted{color:var(--muted)}.hidden{display:none!important}
+.resultsHead{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}.resultsHead h3{margin:0}.sort{padding:9px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.flight{border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;grid-template-columns:1.25fr 1fr auto;gap:18px;align-items:center;margin-bottom:12px;transition:.2s}.flight:hover{border-color:#8bc5e8;box-shadow:0 10px 30px #1020330d;transform:translateY(-1px)}
+.flightNum{font-size:11px;color:var(--blue);font-weight:950;letter-spacing:.08em}.flight h3{margin:7px 0 4px}.flight p{margin:0;color:var(--muted);font-size:13px}.times{display:flex;align-items:center;gap:10px}.times strong{font-size:20px}.line{height:1px;background:var(--line);flex:1}.fare{font-weight:950;font-size:20px;text-align:right}.fare small{display:block;font-size:11px;color:var(--muted);font-weight:500}
+.cabins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.cabin{border:2px solid var(--line);background:#fff;border-radius:17px;padding:17px;text-align:left;min-height:120px;transition:.2s}.cabin:hover{transform:translateY(-2px)}.cabin.active{border-color:var(--blue);background:#f2f9ff}.cabin h3{margin:0 0 6px}.cabin p{margin:0;color:var(--muted);font-size:13px}.priceTag{margin-top:12px;font-weight:900}
+.seatLayout{display:grid;grid-template-columns:1fr 300px;gap:20px}.seatmap{background:linear-gradient(#eef4f8,#e4ebf1);border:1px solid #d5e0e8;border-radius:22px;padding:22px;overflow:auto}.nose{margin:0 auto 18px;width:190px;text-align:center;background:#d6e0e7;border-radius:0 0 80px 80px;padding:10px;font-size:11px;font-weight:900;color:#607184}.seatGrid{display:grid;gap:7px;justify-content:center}.seat{width:36px;height:34px;border:1px solid #aab9c6;border-radius:8px;background:#fff;font-size:9px;box-shadow:0 2px 4px #00000008}.seat:hover:not(.taken){border-color:var(--blue);transform:scale(1.06)}.seat.taken{background:#cbd5dd;color:#8997a2;cursor:not-allowed}.seat.selected{background:var(--blue);border-color:var(--blue);color:#fff}.aisle{width:14px}.seatSide{border:1px solid var(--line);border-radius:20px;padding:20px;background:#fbfdff}.seatSide h3{margin-top:0}.legend{display:grid;gap:9px;color:var(--muted);font-size:12px;margin:18px 0}.dot{display:inline-block;width:13px;height:13px;border-radius:4px;background:#fff;border:1px solid #aab9c6;vertical-align:-2px;margin-right:6px}.dot.sel{background:var(--blue);border-color:var(--blue)}.dot.taken{background:#cbd5dd}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.passenger{border:1px solid var(--line);border-radius:16px;padding:17px;margin-bottom:12px}.passenger h3{margin:0 0 12px}
+.addons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.addon{border:1px solid var(--line);border-radius:16px;padding:17px;background:#fff}.addon label{display:flex;gap:10px;align-items:flex-start}.addon input{accent-color:var(--blue);margin-top:4px}.addon strong{display:block}.addon span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.reviewGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.reviewBox{border:1px solid var(--line);border-radius:17px;padding:18px;background:#fbfdff}.reviewBox h3{margin-top:0}.totalBar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:18px;padding-top:17px}.total{font-size:31px;font-weight:950}
+.paymentGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.payCard{background:linear-gradient(135deg,#0b1e2e,#185276);color:#fff;border-radius:23px;padding:25px;min-height:245px;box-shadow:var(--shadow);position:relative;overflow:hidden}.payCard:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-75px;top:-65px;background:#ffffff12}.chip{width:46px;height:33px;border-radius:7px;background:#d8c78d;margin:30px 0 19px}.cardNum{font-size:21px;letter-spacing:.12em}.payRow{display:flex;justify-content:space-between;margin-top:18px;font-size:12px}.paySide{border:1px solid var(--line);border-radius:20px;padding:22px;background:#fbfdff}.methodRow{display:flex;gap:8px;margin-bottom:16px}.method{border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 11px;font-weight:850}.method.active{border-color:#8bc4e9;background:#eff8ff;color:#0068b8}.swipe{border:2px dashed #a4cce8;border-radius:15px;padding:14px;text-align:center;background:#f4fbff;margin-top:16px}.track{height:42px;background:#dcecf7;border-radius:999px;position:relative;margin-top:9px}.handle{position:absolute;left:4px;top:4px;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;transition:.65s}.demoNote{font-size:11px;color:var(--muted);line-height:1.5}
+.confirm{text-align:center;padding:25px}.check{display:inline-grid;place-items:center;width:85px;height:85px;border-radius:50%;background:#e9f8ef;color:var(--green);font-size:44px}.ref{font-size:42px;font-weight:950;letter-spacing:.1em;margin:12px 0}.boarding{background:linear-gradient(135deg,#081a29,#123e5d);color:#fff;border-radius:24px;padding:27px;display:grid;grid-template-columns:1fr auto;gap:20px}.qr{font-size:80px;display:grid;place-items:center}
+.notice{padding:12px 14px;border-radius:12px;background:#fff8e6;border:1px solid #f0dfa9;color:#715713;font-size:12px;margin-bottom:15px}
+.manage{max-width:720px;margin:auto}.toast{position:fixed;right:20px;bottom:20px;background:#102436;color:#fff;padding:13px 17px;border-radius:12px;z-index:200;display:none;box-shadow:var(--shadow)}.toast.show{display:block}
+@media(max-width:980px){.navlinks{display:none}.mobile{display:block}.searchGrid{grid-template-columns:1fr 1fr}.swap{display:none}.cards{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.features{grid-template-columns:1fr}.foot{grid-template-columns:1fr}.seatLayout,.paymentGrid{grid-template-columns:1fr}.flight{grid-template-columns:1fr auto}.flight .times{order:3;grid-column:1/-1}.addons{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.heroIn{padding-top:80px}.hero{min-height:590px}h1{font-size:52px}.searchGrid,.cards,.cabins,.two,.reviewGrid,.addons{grid-template-columns:1fr}.searchCard{margin:-50px 12px 0}.container{padding:0 16px}.sectionTitle{font-size:35px}.regional{display:block}.regional .primary{margin-top:15px}.body{padding:17px}.flight{grid-template-columns:1fr}.fare{text-align:left}.times{order:0!important}.boarding{grid-template-columns:1fr}.qr{font-size:55px}}
+@media print{.nav,.hero,.searchCard,footer,.panelHead,.steps,.actions,.modal{background:#fff!important}.modal{position:static!important;display:block!important}.panel{box-shadow:none;max-height:none}.close,.steps{display:none!important}.boarding{color:#000;background:#fff;border:1px solid #bbb}}
 </style>
 </head>
 <body>
+<nav class="nav"><div class="navin">
+<a class="logo" href="#" onclick="home();return false">✈ <i>Hamburg</i> International</a>
+<div class="navlinks">
+<button onclick="home()">Home</button><button onclick="scrollToId('destinations')">Destinations</button><button onclick="scrollToId('fleet')">Fleet</button><button onclick="openManage()">Manage booking</button><button onclick="showHelp()">Help</button><button class="primary" onclick="openSearch()">Book a flight</button>
+</div><button class="mobile" onclick="openSearch()">☰</button>
+</div></nav>
 
-<nav class="nav">
-  <div class="navin">
-    <a class="logo" href="#" onclick="home();return false;">✈ <span>Hamburg</span> International</a>
-    <div class="navlinks">
-      <button onclick="home()">Home</button>
-      <button onclick="scrollToId('routes')">Flights</button>
-      <button onclick="scrollToId('destinations')">Destinations</button>
-      <button onclick="scrollToId('fleet')">Fleet</button>
-      <button onclick="openManage()">Manage booking</button>
-      <button onclick="help()">Help</button>
-      <button class="primary" onclick="startBooking()">Book a flight</button>
-    </div>
-    <button class="mobilebtn" onclick="startBooking()">☰</button>
-  </div>
-</nav>
+<header class="hero"><div class="heroIn">
+<div class="eyebrow">VTBS • Bangkok • Suvarnabhumi</div>
+<h1>Make every journey feel first class.</h1>
+<p>A premium fictional Roblox airline experience inspired by the clarity, polish and journey flow of leading international carriers.</p>
+<div class="actions"><button class="primary" onclick="openSearch()">Search flights</button><button class="secondary" style="background:#ffffff12;color:#fff;border-color:#ffffff45" onclick="scrollToId('destinations')">Explore destinations</button></div>
+</div></header>
 
-<header class="hero" id="home">
-  <div class="hero-inner">
-    <div class="eyebrow">✈ Hamburg • HAM • EDDH</div>
-    <h1>Fly beyond the ordinary.</h1>
-    <p>Welcome aboard Hamburg International — a fictional Roblox virtual airline built around the Boeing 777-300ER and a growing network from Hamburg.</p>
-    <div class="actions">
-      <button class="primary" onclick="startBooking()">Search flights</button>
-      <button class="secondary" onclick="scrollToId('destinations')">Explore destinations</button>
-    </div>
-  </div>
-</header>
-
-<main>
-<div class="container">
-  <div class="searchbox">
-    <div class="searchhead">
-      <div>
-        <h2>Where are you flying?</h2>
-        <div class="muted">All times shown in local airport time</div>
-      </div>
-      <span class="badge">HAM HUB</span>
-    </div>
-    <div class="grid">
-      <div class="field"><label>FROM</label><select id="quickFrom"><option>Hamburg (HAM)</option></select></div>
-      <div class="field"><label>TO</label><select id="quickTo"><option>London (LHR)</option><option>New York (JFK)</option><option>Toronto (YYZ)</option><option>Dubai (DXB)</option><option>Tokyo (NRT)</option><option>Paris (CDG)</option><option>Vancouver (YVR)</option><option>Copenhagen (CPH)</option><option>Amsterdam (AMS)</option><option>Berlin (BER)</option><option>Frankfurt (FRA)</option><option>Munich (MUC)</option><option>Oslo (OSL)</option></select></div>
-      <div class="field"><label>DEPARTURE</label><input id="quickDate" type="date"></div>
-      <div class="field"><label>PASSENGERS</label><select id="quickPax"><option>1 passenger</option><option>2 passengers</option><option>3 passengers</option><option>4 passengers</option><option>5 passengers</option></select></div>
-    </div>
-    <div style="margin-top:14px"><button class="primary" onclick="startBooking()">Search</button></div>
-  </div>
-
-  <section id="routes">
-    <div class="eyebrow" style="color:var(--accent)">Popular routes</div>
-    <h2 class="section-title">Take off from Hamburg.</h2>
-    <p class="section-sub">A clean, simple way to explore the Hamburg International network. Pick a destination, choose your cabin, select a seat, and receive a virtual booking reference.</p>
-    <div class="cards" id="destinations">
-      <div class="card route"><div class="num">HI101</div><h3>Hamburg → London</h3><p>HAM • LHR · 1h 45m</p></div>
-      <div class="card route"><div class="num">HI102</div><h3>Hamburg → New York</h3><p>HAM • JFK · 8h 45m</p></div>
-      <div class="card route"><div class="num">HI103</div><h3>Hamburg → Toronto</h3><p>HAM • YYZ · 8h 55m</p></div>
-      <div class="card route"><div class="num">HI104</div><h3>Hamburg → Dubai</h3><p>HAM • DXB · 6h 35m</p></div>
-    </div>
-    <div class="regional-banner">
-      <div>
-        <div class="eyebrow" style="color:var(--accent)">Regional network</div>
-        <h3>Short hops, ATR style.</h3>
-        <p>The ATR 72-600 handles Hamburg International's regional network, connecting Hamburg with nearby European cities.</p>
-      </div>
-      <button class="primary" onclick="startRegionalBooking()">View regional flights</button>
-    </div>
-  </section>
-
-  <section>
-    <h2 class="section-title">The Hamburg International experience</h2>
-    <p class="section-sub">Designed for Roblox aviation communities: simple booking, clear seating, and a virtual boarding pass at the end.</p>
-    <div class="features">
-      <div class="card feature"><div class="icon">✈️</div><h3>Mixed fleet</h3><p>777-300ERs handle long-haul flying while ATR 72-600s operate the regional network around Europe.</p></div>
-      <div class="card feature"><div class="icon">✓</div><h3>Easy booking</h3><p>Search, choose your cabin, select an exact seat, add passenger details, and confirm your trip.</p></div>
-      <div class="card feature"><div class="icon">★</div><h3>Community first</h3><p>Connect your Roblox aviation community and Discord server for flights, events and announcements.</p></div>
-    </div>
-  </section>
-
-  <section id="fleet">
-    <div class="eyebrow" style="color:var(--accent)">Our fleet</div>
-    <h2 class="section-title">Two aircraft. One network.</h2>
-    <p class="section-sub">The 777-300ER handles the big international routes while the ATR 72-600 brings Hamburg International's regional network to life.</p>
-
-    <div class="fleet">
-      <div class="fleet-photo"></div>
-      <div class="fleet-copy">
-        <div class="eyebrow">Long-haul flagship</div>
-        <h2 style="font-size:42px;letter-spacing:-.05em;margin:12px 0">Boeing 777-300ER</h2>
-        <p>Our flagship widebody for long-haul and major international services. The booking system includes a spacious 3–4–3 economy layout with clear aisles.</p>
-        <div class="pills"><span class="pill">3–4–3 Economy</span><span class="pill">Business Class</span><span class="pill">First Class</span><span class="pill">Long-haul</span></div>
-      </div>
-    </div>
-
-    <div class="fleet atrfleet">
-      <div class="fleet-copy">
-        <div class="eyebrow">Regional workhorse</div>
-        <h2 style="font-size:42px;letter-spacing:-.05em;margin:12px 0">ATR 72-600</h2>
-        <p>Our regional turboprop for short European sectors from Hamburg. It serves Copenhagen, Amsterdam, Berlin, Frankfurt, Munich, Oslo and other nearby destinations.</p>
-        <div class="pills"><span class="pill">Regional</span><span class="pill">72-seat concept</span><span class="pill">Short-haul</span><span class="pill">European network</span></div>
-        <button class="primary" style="margin-top:24px" onclick="startRegionalBooking()">Book a regional flight</button>
-      </div>
-      <div class="atr-photo"></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="manage card">
-      <div class="eyebrow" style="color:var(--accent)">Manage booking</div>
-      <h2 class="section-title" style="font-size:30px">Already booked?</h2>
-      <p class="section-sub">Retrieve a virtual booking saved in this browser.</p>
-      <div class="field"><label>BOOKING REFERENCE</label><input id="manageRef" placeholder="Example: HI7K2Q"></div>
-      <button class="primary" style="margin-top:12px" onclick="findBooking()">Find booking</button>
-      <div id="manageResult" style="margin-top:14px"></div>
-    </div>
-  </section>
+<main><div class="container">
+<div class="searchCard" id="searchCard">
+<div class="searchTop"><div><h2>Book your journey</h2><div class="muted">Search from our VTBS hub and build your trip step by step.</div></div><span class="hub">VTBS HUB</span></div>
+<div class="tabs"><button class="tab active" data-trip="return" onclick="setTrip('return')">Return</button><button class="tab" data-trip="oneway" onclick="setTrip('oneway')">One way</button><button class="tab" data-trip="multi" onclick="setTrip('multi')">Multi-city</button></div>
+<div class="searchGrid">
+<div class="field"><label>FROM</label><select id="searchFrom"><option>Bangkok (VTBS)</option></select></div>
+<div class="field"><label>TO</label><select id="searchTo"></select></div>
+<div class="field"><label>DEPART</label><input id="searchDate" type="date"></div>
+<div class="field" id="returnField"><label>RETURN</label><input id="returnDate" type="date"></div>
+<div class="field"><label>PASSENGERS</label><select id="searchPax"><option value="1">1 passenger</option><option value="2">2 passengers</option><option value="3">3 passengers</option><option value="4">4 passengers</option><option value="5">5 passengers</option><option value="6">6 passengers</option><option value="7">7 passengers</option><option value="8">8 passengers</option><option value="9">9 passengers</option></select></div>
 </div>
-</main>
+<div class="searchAction"><span class="fine">Virtual fares only • Nothing is charged • Do not enter real card details</span><button class="primary" onclick="searchFlights()">Search flights →</button></div>
+</div>
 
-<footer>
-  <div class="container">
-    <div class="footergrid">
-      <div><h2>Hamburg International</h2><p>A fictional Roblox virtual airline project. Hamburg is our hub and the Boeing 777-300ER is our flagship aircraft.</p></div>
-      <div><h3>Quick links</h3><p><a href="#routes">Book a flight</a><br><a href="#fleet">Fleet</a><br><a href="#" onclick="openManage();return false">Manage booking</a><br><a href="#" onclick="help();return false">Help</a></p></div>
-      <div><h3>💬 Join our Discord</h3><p>Flight announcements, events, community updates and more.</p><a class="primary" href="https://discord.gg/yggVGk9cWt" target="_blank" rel="noopener">Join Discord ↗</a></div>
-    </div>
-    <div class="copyright">© 2026 Hamburg International Virtual Airlines • Fictional Roblox project • Not affiliated with Hamburg Airport, Boeing, Roblox Corporation, or any real-world airline/company.</div>
-  </div>
-</footer>
+<section id="destinations"><div class="eyebrow" style="color:var(--blue)">Popular routes</div><h2 class="sectionTitle">Go further from Bangkok.</h2><p class="sectionSub">A flagship international network from Suvarnabhumi, plus ATR regional services. Prices below are fictional and exist only for the Roblox experience.</p>
+<div class="cards" id="routeCards"></div>
+<div class="regional"><div><div class="eyebrow" style="color:var(--blue)">Regional network</div><h3>ATR 72-600 services</h3><p>Shorter regional sectors are operated by our ATR 72-600 concept.</p></div><button class="primary" onclick="openSearch('regional')">View regional flights</button></div>
+</section>
+
+<section><div class="split"><div class="photo"></div><div class="dark"><div class="eyebrow">Long-haul flagship</div><h2 style="font-size:43px;letter-spacing:-.05em;margin:12px 0">Boeing 777-300ER</h2><p>Our flagship for major international services. The redesigned booking flow gives the 777 a proper widebody seat map, cabin selection, add-ons, fare breakdown and a polished virtual boarding pass.</p><div class="pills"><span class="pill">3–4–3 Economy</span><span class="pill">Business</span><span class="pill">First</span><span class="pill">Long-haul</span></div></div></div></section>
+
+<section id="fleet"><div class="eyebrow" style="color:var(--blue)">The fleet</div><h2 class="sectionTitle">Two aircraft. One premium journey.</h2><p class="sectionSub">The 777-300ER handles the major international network while the ATR 72-600 focuses on regional flying.</p>
+<div class="features">
+<div class="card feature"><div class="ico">✈</div><h3>777-300ER</h3><p>Widebody flagship with Economy, Business and First Class concepts and a 3–4–3 main cabin.</p></div>
+<div class="card feature"><div class="ico">◈</div><h3>ATR 72-600</h3><p>Regional workhorse with a compact 2–2 cabin and simpler fare structure.</p></div>
+<div class="card feature"><div class="ico">✓</div><h3>Airport-style flow</h3><p>Search → flights → cabin → seats → passengers → extras → review → demo payment → boarding pass.</p></div>
+</div></section>
+</div></main>
+
+<footer><div class="container"><div class="foot">
+<div><h2>Hamburg International</h2><p>A fictional Roblox virtual airline based at Suvarnabhumi (VTBS). This project is not affiliated with Thai Airways, Emirates, Qatar Airways, Boeing, Roblox Corporation, Suvarnabhumi Airport, or any real-world airline.</p></div>
+<div><h3>Quick links</h3><p><a href="#destinations">Destinations</a><br><a href="#fleet">Fleet</a><br><a href="#" onclick="openManage();return false">Manage booking</a><br><a href="#" onclick="showHelp();return false">Help</a></p></div>
+<div><h3>Community</h3><p>Join the Discord for flight events and announcements.</p><a class="primary" href="https://discord.gg/yggVGk9cWt" target="_blank" rel="noopener">Join Discord ↗</a></div>
+</div><div class="copyright">© 2026 Hamburg International Virtual Airlines • Fictional Roblox project</div></div></footer>
 
 <div class="toast" id="toast"></div>
-
-<div class="modal" id="bookingModal">
-  <div class="panel">
-    <div class="panelhead"><h2 id="modalTitle">Choose your flight</h2><button class="close" onclick="closeModal()">×</button></div>
-    <div class="steps">
-      <span class="step active" id="s1">1 • Flight</span><span class="step" id="s2">2 • Seats</span><span class="step" id="s3">3 • Passengers</span><span class="step" id="s4">4 • Review</span>
-    </div>
-    <div class="modalbody" id="modalBody"></div>
-  </div>
-</div>
+<div class="modal" id="modal"><div class="panel">
+<div class="panelHead"><h2 id="modalTitle">Book a flight</h2><button class="close" onclick="closeModal()">×</button></div>
+<div class="steps"><span class="step active" id="st1">1 • Flights</span><span class="step" id="st2">2 • Cabin & seats</span><span class="step" id="st3">3 • Passengers</span><span class="step" id="st4">4 • Extras</span><span class="step" id="st5">5 • Review</span><span class="step" id="st6">6 • Payment</span></div>
+<div class="body" id="body"></div>
+</div></div>
 
 <script>
 const routes=[
- {num:"HI101",to:"London",code:"LHR",time:"1h 45m",price:159,type:"777-300ER",category:"International"},
- {num:"HI102",to:"New York",code:"JFK",time:"8h 45m",price:599,type:"777-300ER",category:"Long-haul"},
- {num:"HI103",to:"Toronto",code:"YYZ",time:"8h 55m",price:579,type:"777-300ER",category:"Long-haul"},
- {num:"HI104",to:"Dubai",code:"DXB",time:"6h 35m",price:489,type:"777-300ER",category:"Long-haul"},
- {num:"HI105",to:"Tokyo",code:"NRT",time:"11h 40m",price:799,type:"777-300ER",category:"Long-haul"},
- {num:"HI106",to:"Paris",code:"CDG",time:"1h 40m",price:149,type:"777-300ER",category:"International"},
- {num:"HI107",to:"Vancouver",code:"YVR",time:"9h 55m",price:649,type:"777-300ER",category:"Long-haul"},
- {num:"HI201",to:"Copenhagen",code:"CPH",time:"1h 10m",price:89,type:"ATR 72-600",category:"Regional"},
- {num:"HI202",to:"Amsterdam",code:"AMS",time:"1h 15m",price:99,type:"ATR 72-600",category:"Regional"},
- {num:"HI203",to:"Berlin",code:"BER",time:"1h 20m",price:85,type:"ATR 72-600",category:"Regional"},
- {num:"HI204",to:"Frankfurt",code:"FRA",time:"1h 10m",price:89,type:"ATR 72-600",category:"Regional"},
- {num:"HI205",to:"Munich",code:"MUC",time:"1h 25m",price:95,type:"ATR 72-600",category:"Regional"},
- {num:"HI206",to:"Oslo",code:"OSL",time:"1h 30m",price:109,type:"ATR 72-600",category:"Regional"}
+{num:"HI101",to:"Tokyo",code:"NRT",time:"06h 15m",price:399,type:"777-300ER",cat:"International"},
+{num:"HI102",to:"Dubai",code:"DXB",time:"06h 30m",price:489,type:"777-300ER",cat:"International"},
+{num:"HI103",to:"Paris",code:"CDG",time:"12h 35m",price:699,type:"777-300ER",cat:"Long-haul"},
+{num:"HI104",to:"London",code:"LHR",time:"12h 55m",price:749,type:"777-300ER",cat:"Long-haul"},
+{num:"HI105",to:"New York",code:"JFK",time:"16h 10m",price:899,type:"777-300ER",cat:"Long-haul"},
+{num:"HI106",to:"Vancouver",code:"YVR",time:"13h 40m",price:849,type:"777-300ER",cat:"Long-haul"},
+{num:"HI107",to:"Seoul",code:"ICN",time:"05h 20m",price:349,type:"777-300ER",cat:"International"},
+{num:"HI108",to:"Hong Kong",code:"HKG",time:"02h 55m",price:139,type:"ATR 72-600",cat:"Regional"},
+{num:"HI201",to:"Singapore",code:"SIN",time:"02h 25m",price:129,type:"ATR 72-600",cat:"Regional"},
+{num:"HI202",to:"Phuket",code:"HKT",time:"01h 25m",price:79,type:"ATR 72-600",cat:"Regional"},
+{num:"HI203",to:"Chiang Mai",code:"CNX",time:"01h 20m",price:69,type:"ATR 72-600",cat:"Regional"},
+{num:"HI204",to:"Copenhagen",code:"CPH",time:"11h 15m",price:399,type:"ATR 72-600",cat:"Regional"},
+{num:"HI205",to:"Amsterdam",code:"AMS",time:"12h 20m",price:429,type:"ATR 72-600",cat:"Regional"}
 ];
-let state={route:null,cabin:"Economy",seats:[],passengers:1,booking:null};
+let state={trip:"return",route:null,cabin:"Economy",pax:1,seats:[],passengers:[],extras:[],total:0,booking:null,payment:false};
 
-function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth"})}
-function home(){window.scrollTo({top:0,behavior:"smooth"})}
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
-function openModal(){document.getElementById("bookingModal").classList.add("show")}
-function closeModal(){document.getElementById("bookingModal").classList.remove("show")}
-function setSteps(n){
- for(let i=1;i<=4;i++) document.getElementById("s"+i).classList.toggle("active",i===n);
+const $=id=>document.getElementById(id);
+function money(n){return "€"+Math.round(n)}
+function toast(x){let t=$("toast");t.textContent=x;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2500)}
+function home(){scrollTo({top:0,behavior:"smooth"})}
+function scrollToId(id){$(id)?.scrollIntoView({behavior:"smooth"})}
+function openModal(){ $("modal").classList.add("show") }
+function closeModal(){ $("modal").classList.remove("show") }
+function setStep(n){for(let i=1;i<=6;i++)$("st"+i).classList.toggle("active",i===n)}
+function setTrip(x){state.trip=x;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.trip===x));$("returnField").classList.toggle("hidden",x==="oneway")}
+function fillDestinations(){
+ $("searchTo").innerHTML=routes.map(r=>`<option value="${r.code}">${r.to} (${r.code})</option>`).join("");
+ $("routeCards").innerHTML=routes.filter(r=>r.type==="777-300ER").slice(0,4).map(r=>`<div class="card route" onclick="quickRoute('${r.code}')"><div class="num">${r.num}</div><h3>Bangkok → ${r.to}</h3><p>VTBS • ${r.code} · ${r.time} · from ${money(r.price)}</p></div>`).join("");
 }
-function startBooking(){
- const to=document.getElementById("quickTo")?.value||"London (LHR)";
- const match=routes.find(r=>to.includes(r.code))||routes[0];
- state.route=match;state.passengers=parseInt(document.getElementById("quickPax")?.value)||1;state.seats=[];
- openModal();showFlights();
+function quickRoute(code){$("searchTo").value=code;openSearch()}
+function openSearch(mode){
+ if(mode==="regional") $("searchTo").value="HKT";
+ openModal();renderFlightSearch();
 }
-function showFlights(){
- setSteps(1);document.getElementById("modalTitle").textContent="Choose your flight";
- const body=document.getElementById("modalBody");
- body.innerHTML=`<p class="muted">Hamburg (HAM) → your destination</p><div class="flight-list">${
- routes.map(r=>`<div class="flight"><div><span class="badge">${r.num}</span><h3>Hamburg (HAM) → ${r.to} (${r.code})</h3><p>${r.time} • ${r.type} • ${r.category} • From €${r.price}</p></div><button class="primary" onclick="chooseRoute('${r.num}')">Select</button></div>`).join("")
- }</div>`;
+function searchFlights(){openModal();renderFlightSearch()}
+function renderFlightSearch(){
+ setStep(1);$("modalTitle").textContent="Choose your flight";
+ let to=$("searchTo").value, chosen=routes.find(r=>r.code===to)||routes[0];
+ let list=routes.filter(r=>r.code===to);
+ if(!list.length) list=[chosen];
+ // show several realistic options for the same route
+ const variants=[{suffix:"A",delta:0,depart:"08:40"},{suffix:"B",delta:28,depart:"14:15"},{suffix:"C",delta:52,depart:"21:30"}];
+ $("body").innerHTML=`<div class="resultsHead"><div><h3>${chosen.to} (${chosen.code})</h3><p class="muted">Bangkok (VTBS) → ${chosen.to} · ${$("searchDate").value||"Selected date"}</p></div><select class="sort" onchange="sortResults(this.value)"><option value="price">Sort: price</option><option value="time">Sort: departure</option></select></div><div id="flightResults"></div>`;
+ window._flightVariants=variants.map(v=>({...chosen,variant:v.suffix,depart:v.depart,price:v.price+v.delta,arrive:"18:55"}));
+ drawResults("price");
 }
-function chooseRoute(num){state.route=routes.find(r=>r.num===num);if(state.route.type==="ATR 72-600")state.cabin="Economy";showCabins()}
-function startRegionalBooking(){
- const regional=routes.find(r=>r.type==="ATR 72-600");
- state.route=regional;state.cabin="Economy";state.passengers=1;state.seats=[];
- openModal();showRegionalFlights();
+function sortResults(mode){drawResults(mode)}
+function drawResults(mode){
+ let a=[...window._flightVariants];if(mode==="price")a.sort((x,y)=>x.price-y.price);else a.sort((x,y)=>x.depart.localeCompare(y.depart));
+ $("flightResults").innerHTML=a.map((r,i)=>`<div class="flight">
+<div><div class="flightNum">${r.num}-${r.variant} · ${r.type}</div><div class="times"><strong>${r.depart}</strong><span class="line"></span><strong>${r.arrive}</strong></div><p>${r.time} · Non-stop · VTBS → ${r.code}</p></div>
+<div><strong>${r.cat}</strong><p>Standard virtual fare</p></div>
+<div class="fare">${money(r.price)}<small>per passenger</small><button class="primary" style="margin-top:9px" onclick="chooseFlight('${r.num}','${r.variant}')">Select</button></div></div>`).join("");
 }
-function showRegionalFlights(){
- setSteps(1);document.getElementById("modalTitle").textContent="Regional flights";
- document.getElementById("modalBody").innerHTML=`<p class="muted">ATR 72-600 regional services from Hamburg (HAM)</p><div class="flight-list">${
- routes.filter(r=>r.type==="ATR 72-600").map(r=>`<div class="flight"><div><span class="badge">${r.num}</span><h3>Hamburg (HAM) → ${r.to} (${r.code})</h3><p>${r.time} • ATR 72-600 • Regional • From €${r.price}</p></div><button class="primary" onclick="chooseRoute('${r.num}')">Select</button></div>`).join("")
- }</div>`;
+function chooseFlight(num,v){
+ state.route=routes.find(r=>r.num===num);state.pax=parseInt($("searchPax").value)||1;state.seats=[];state.passengers=[];state.extras=[];state.cabin="Economy";state.flightVariant=v;renderCabins();
 }
-function showCabins(){
- setSteps(2);document.getElementById("modalTitle").textContent="Select your seats";
- document.getElementById("modalBody").innerHTML=`
- <p><strong>${state.route.num}</strong> · Hamburg (HAM) → ${state.route.to} (${state.route.code}) · ${state.route.time}</p>
+function renderCabins(){
+ setStep(2);$("modalTitle").textContent="Choose your cabin";
+ let r=state.route, first=r.type==="777-300ER";
+ $("body").innerHTML=`<p class="muted"><strong>${r.num}-${state.flightVariant}</strong> · VTBS → ${r.code} · ${r.time} · ${r.type}</p>
  <div class="cabins">
-  <button class="cabin ${state.cabin==="Economy"?"active":""}" onclick="state.cabin='Economy';showCabins()"><h3>Economy</h3><p>${state.route.type==="ATR 72-600"?"2–2 regional seating":"3–4–3 comfortable standard seating"}</p></button>
-  <button class="cabin ${state.route.type==="ATR 72-600"?"hidden ":""}cabin ${state.cabin==="Business"?"active":""}" onclick="state.cabin='Business';showCabins()"><h3>Business</h3><p>Premium cabin • More personal space</p></button>
-  <button class="cabin ${state.route.type==="ATR 72-600"?"hidden ":""}cabin ${state.cabin==="First"?"active":""}" onclick="state.cabin='First';showCabins()"><h3>First</h3><p>Premium flagship experience</p></button>
- </div>
- <div class="seatmap"><div class="seatgrid" id="seatgrid"></div>
- <div class="seatlegend"><span><i class="dot"></i> Available</span><span><i class="dot sel"></i> Selected</span><span><i class="dot taken"></i> Unavailable</span></div></div>
- <div style="display:flex;justify-content:space-between;gap:10px;margin-top:18px"><button class="secondary" style="color:var(--ink);border-color:var(--line);background:#fff" onclick="showFlights()">Back</button><button class="primary" onclick="toPassengers()">Continue to passenger details</button></div>`;
- renderSeats();
+ <button class="cabin ${state.cabin==="Economy"?"active":""}" onclick="pickCabin('Economy')"><h3>Economy Class</h3><p>Comfortable standard seating, cabin baggage and virtual boarding pass.</p><div class="priceTag">${money(r.price)} / passenger</div></button>
+ ${first?`<button class="cabin ${state.cabin==="Business"?"active":""}" onclick="pickCabin('Business')"><h3>Business Class</h3><p>More space, priority-style experience and premium seat choices.</p><div class="priceTag">${money(r.price*2.2)} / passenger</div></button>
+ <button class="cabin ${state.cabin==="First"?"active":""}" onclick="pickCabin('First')"><h3>First Class <span style="color:var(--gold)">★</span></h3><p>Flagship premium cabin. In the Roblox project, access can be tied to your FC role.</p><div class="priceTag">${money(r.price*3.6)} / passenger</div></button>`:""}
+ </div><div style="margin-top:20px"><button class="primary" onclick="renderSeats()">Continue to seat selection →</button></div>`;
 }
+function pickCabin(c){state.cabin=c;renderCabins()}
 function renderSeats(){
- const grid=document.getElementById("seatgrid"); if(!grid)return;
- const taken=new Set(state.route.type==="ATR 72-600"
-  ?["3B","8D","14A","22E","27B"]
-  :["3C","8H","14D","22J","27A","31F","36G","40C","44H"]);
- const letters=state.route.type==="ATR 72-600"?["A","B","D","E"]:["A","B","C","D","E","F","G","H","J","K"];
- grid.style.gridTemplateColumns=state.route.type==="ATR 72-600"?"repeat(4,34px)":"repeat(10,34px)";
- const maxRows=state.route.type==="ATR 72-600"?18:45;
- for(let r=1;r<=maxRows;r++){
-  letters.forEach((l,i)=>{
-   const b=document.createElement("button");const id=r+l;b.className="seat";b.textContent=id;
-   if(taken.has(id))b.classList.add("taken");
-   if(state.seats.includes(id))b.classList.add("selected");
-   if(!taken.has(id))b.onclick=()=>toggleSeat(id);
-   grid.appendChild(b);
-  });
- }
+ setStep(2);$("modalTitle").textContent="Choose your seats";
+ const atr=state.route.type==="ATR 72-600", letters=atr?["A","B","D","E"]:["A","B","C","D","E","F","G","H","J","K"], rows=atr?18:45;
+ const taken=new Set(atr?["3B","8D","14A","16E"]:["3C","8H","14D","22J","27A","31F","36G","40C","44H","18E","29B","34J"]);
+ let seats="";
+ for(let row=1;row<=rows;row++)letters.forEach((l,i)=>{seats+=`<button class="seat ${taken.has(row+l)?"taken":""} ${state.seats.includes(row+l)?"selected":""}" ${taken.has(row+l)?"disabled":`onclick="toggleSeat('${row+l}')"`}>${row+l}</button>`});
+ let cols=atr?4:10;
+ $("body").innerHTML=`<div class="seatLayout"><div><div class="seatmap"><div class="nose">AIRCRAFT NOSE ↑</div><div class="seatGrid" style="grid-template-columns:repeat(${cols},36px)">${seats}</div><div class="legend"><span><i class="dot"></i> Available</span><span><i class="dot sel"></i> Selected</span><span><i class="dot taken"></i> Unavailable</span></div></div></div>
+ <aside class="seatSide"><h3>${state.route.type}</h3><p class="muted">${state.cabin} Class</p><p><strong>${state.seats.length}</strong> of <strong>${state.pax}</strong> seats selected</p><div class="legend"><span>🪑 Standard seat</span><span>✦ Window/aisle choices vary by cabin</span></div><button class="primary" style="width:100%" onclick="toPassengers()">Continue →</button><button class="secondary" style="width:100%;margin-top:8px" onclick="renderCabins()">Back</button></aside></div>`;
 }
 function toggleSeat(id){
  if(state.seats.includes(id))state.seats=state.seats.filter(x=>x!==id);
- else if(state.seats.length<state.passengers)state.seats.push(id);
- else toast("You can only select "+state.passengers+" seat(s).");
- showCabins();
+ else if(state.seats.length<state.pax)state.seats.push(id);else toast(`Select up to ${state.pax} seat${state.pax>1?"s":""}.`);
+ renderSeats();
 }
 function toPassengers(){
- if(state.seats.length!==state.passengers){toast("Please select "+state.passengers+" seat(s).");return}
- setSteps(3);document.getElementById("modalTitle").textContent="Passenger details";
- let forms="";
- for(let i=0;i<state.passengers;i++) forms+=`<div class="passenger"><h3>Passenger ${i+1} · Seat ${state.seats[i]}</h3><div class="two"><div class="field"><label>ROBLOX USERNAME</label><input id="user${i}" placeholder="@username"></div><div class="field"><label>DISPLAY NAME</label><input id="display${i}" placeholder="Display name"></div></div></div>`;
- document.getElementById("modalBody").innerHTML=`<div class="notice">For privacy, do not enter passwords, payment information, or other sensitive information. This virtual booking only needs your Roblox username and display name.</div>${forms}<div style="display:flex;justify-content:space-between"><button class="secondary" style="color:var(--ink);border-color:var(--line);background:#fff" onclick="showCabins()">Back</button><button class="primary" onclick="toReview()">Review booking</button></div>`;
+ if(state.seats.length!==state.pax){toast(`Please select ${state.pax} seat${state.pax>1?"s":""}.`);return}
+ setStep(3);$("modalTitle").textContent="Passenger details";
+ let f="";for(let i=0;i<state.pax;i++)f+=`<div class="passenger"><h3>Passenger ${i+1} · Seat ${state.seats[i]}</h3><div class="two"><div class="field"><label>ROBLOX USERNAME</label><input id="u${i}" placeholder="@username"></div><div class="field"><label>DISPLAY NAME</label><input id="d${i}" placeholder="Display name"></div></div></div>`;
+ $("body").innerHTML=`<div class="notice">This is a fictional Roblox booking. Never enter a password or real payment details.</div>${f}<div style="display:flex;justify-content:space-between"><button class="secondary" onclick="renderSeats()">Back</button><button class="primary" onclick="toExtras()">Continue →</button></div>`;
 }
-function toReview(){
- const pax=[];
- for(let i=0;i<state.passengers;i++){const u=document.getElementById("user"+i).value.trim(),d=document.getElementById("display"+i).value.trim();if(!u||!d){toast("Please complete every passenger.");return}pax.push({u,d,seat:state.seats[i]})}
- state.pax=pax;setSteps(4);document.getElementById("modalTitle").textContent="Review your trip";
- const total=state.route.price*(state.route.type==="ATR 72-600"?1:(state.cabin==="Economy"?1:state.cabin==="Business"?2.2:3.6))*state.passengers;
- document.getElementById("modalBody").innerHTML=`<div class="review"><div class="reviewbox"><h3>Flight</h3><p><strong>${state.route.num}</strong></p><p>Hamburg (HAM) → ${state.route.to} (${state.route.code})</p><p>${state.route.time} · ${state.route.type}</p></div><div class="reviewbox"><h3>Cabin & seats</h3><p>${state.cabin} Class</p><p>${state.seats.join(", ")}</p><p><strong>Virtual fare: €${Math.round(total)}</strong></p></div></div><div class="reviewbox" style="margin-top:16px"><h3>Passengers</h3>${pax.map(p=>`<p><strong>${p.d}</strong> · @${p.u.replace(/^@/,"")} · Seat ${p.seat}</p>`).join("")}</div><div style="display:flex;justify-content:space-between;margin-top:18px"><button class="secondary" style="color:var(--ink);border-color:var(--line);background:#fff" onclick="toPassengers()">Back</button><button class="primary" onclick="confirmBooking()">Confirm booking</button></div>`;
+function toExtras(){
+ let p=[];for(let i=0;i<state.pax;i++){let u=$("u"+i).value.trim(),d=$("d"+i).value.trim();if(!u||!d){toast("Complete every passenger.");return}p.push({u:u.replace(/^@/,""),d,seat:state.seats[i]})}
+ state.passengers=p;renderExtras();
+}
+function renderExtras(){
+ setStep(4);$("modalTitle").textContent="Personalise your journey";
+ const opts=[["lounge","Virtual lounge pass","Access the premium lounge before your Roblox flight.",25],["meal","Signature meal","Add a fun meal selection to the virtual itinerary.",15],["bag","Extra checked bag","Add one extra virtual checked bag.",30]];
+ $("body").innerHTML=`<p class="muted">Optional extras — all prices are fictional.</p><div class="addons">${opts.map(o=>`<div class="addon"><label><input type="checkbox" value="${o[0]}" ${state.extras.includes(o[0])?"checked":""} onchange="toggleExtra('${o[0]}',${o[3]})"><div><strong>${o[1]}</strong><span>${o[2]}</span><span>+ ${money(o[3])} / passenger</span></div></label></div>`).join("")}</div><div style="display:flex;justify-content:space-between;margin-top:20px"><button class="secondary" onclick="toPassengers()">Back</button><button class="primary" onclick="renderReview()">Review booking →</button></div>`;
+}
+function toggleExtra(id,price){if(state.extras.includes(id))state.extras=state.extras.filter(x=>x!==id);else state.extras.push(id)}
+function calcTotal(){
+ let base=state.route.price*(state.cabin==="Economy"?1:state.cabin==="Business"?2.2:3.6)*state.pax;
+ let ex={lounge:25,meal:15,bag:30};return Math.round(base+state.extras.reduce((a,x)=>a+(ex[x]||0)*state.pax,0))
+}
+function renderReview(){
+ state.total=calcTotal();setStep(5);$("modalTitle").textContent="Review and confirm";
+ $("body").innerHTML=`<div class="reviewGrid"><div class="reviewBox"><h3>Flight</h3><p><strong>${state.route.num}-${state.flightVariant}</strong></p><p>Bangkok (VTBS) → ${state.route.to} (${state.route.code})</p><p>${state.route.time} · ${state.route.type}</p></div><div class="reviewBox"><h3>Cabin & seats</h3><p>${state.cabin} Class</p><p>Seats: ${state.seats.join(", ")}</p><p>${state.pax} passenger${state.pax>1?"s":""}</p></div><div class="reviewBox"><h3>Passengers</h3>${state.passengers.map(p=>`<p><strong>${p.d}</strong> · @${p.u} · ${p.seat}</p>`).join("")}</div><div class="reviewBox"><h3>Extras</h3><p>${state.extras.length?state.extras.join(", "):"No extras selected"}</p><div class="totalBar"><span>Total virtual fare</span><span class="total">${money(state.total)}</span></div></div></div><div class="notice" style="margin-top:16px"><strong>Demo checkout:</strong> the next screen is simulated. Nothing is charged.</div><div style="display:flex;justify-content:space-between"><button class="secondary" onclick="renderExtras()">Back</button><button class="primary" onclick="renderPayment()">Continue to payment →</button></div>`;
+}
+function renderPayment(){
+ setStep(6);$("modalTitle").textContent="Secure virtual checkout";
+ $("body").innerHTML=`<div class="notice"><strong>Fictional payment demo.</strong> Do not enter real card numbers, CVV codes, passwords or financial information. Use placeholder values such as 0000 0000 0000 0000.</div><div class="paymentGrid"><div><div class="payCard"><strong>HAMBURG INTERNATIONAL</strong><span style="float:right">VTBS</span><div class="chip"></div><div class="cardNum" id="cardPreview">0000 •••• •••• 0000</div><div class="payRow"><span id="namePreview">DEMO PASSENGER</span><span>${money(state.total)}</span></div></div><div class="swipe"><strong>Contactless / swipe</strong><div class="muted">Simulate a card tap or swipe.</div><div class="track"><div class="handle" id="handle">›</div></div><button class="primary" style="margin-top:10px" onclick="fakeSwipe()">Swipe / Tap to Pay</button></div></div><div class="paySide"><h3>Payment method</h3><div class="methodRow"><button class="method active">💳 Credit card</button><button class="method" onclick="toast('Tap to Pay selected')">📱 Tap to Pay</button></div><div class="field"><label>DEMO CARD NUMBER</label><input id="card" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" oninput="cardPreview()"></div><div class="field" style="margin-top:12px"><label>CARDHOLDER NAME</label><input id="cardName" maxlength="30" placeholder="DEMO PASSENGER" oninput="namePreview()"></div><div class="two" style="margin-top:12px"><div class="field"><label>EXPIRY</label><input id="exp" maxlength="5" placeholder="MM/YY"></div><div class="field"><label>CVV</label><input id="cvv" maxlength="4" inputmode="numeric" placeholder="000"></div></div><div class="totalBar"><span>Total</span><span class="total">${money(state.total)}</span></div><p class="demoNote">This form is intentionally non-functional. It exists only to make the Roblox airline booking experience feel like a real checkout.</p></div></div><div style="display:flex;justify-content:space-between;margin-top:20px"><button class="secondary" onclick="renderReview()">Back</button><button class="primary" onclick="approvePayment()">✓ Approve demo payment</button></div>`;
+}
+function cardPreview(){let r=$("card").value.replace(/\D/g,"").slice(0,16);$("card").value=r.replace(/(.{4})/g,"$1 ").trim();$("cardPreview").textContent=(r+"••••••••••••••••").slice(0,16).replace(/(.{4})/g,"$1 ").trim()}
+function namePreview(){$("namePreview").textContent=($("cardName").value||"DEMO PASSENGER").toUpperCase()}
+function fakeSwipe(){let h=$("handle");h.style.left="calc(100% - 38px)";setTimeout(()=>{h.style.left="4px";toast("Virtual card swipe approved ✓")},700)}
+function approvePayment(){
+ let card=($("card")?.value||"").replace(/\D/g,""),name=($("cardName")?.value||"").trim(),exp=($("exp")?.value||"").trim(),cvv=($("cvv")?.value||"").trim();
+ if(card.length<12||!name||!exp||cvv.length<3){toast("Use placeholder demo values to continue.");return}
+ confirmBooking();
 }
 function confirmBooking(){
- const ref="HI"+Math.random().toString(36).substring(2,7).toUpperCase();
- state.booking={ref,route:state.route,cabin:state.cabin,seats:state.seats,pax:state.pax,created:new Date().toISOString()};
- localStorage.setItem("hamburgInternationalBooking",JSON.stringify(state.booking));
- showConfirmation();
+ const ref="HI"+Math.random().toString(36).slice(2,8).toUpperCase();
+ state.booking={ref,route:state.route,variant:state.flightVariant,cabin:state.cabin,seats:state.seats,passengers:state.passengers,extras:state.extras,total:state.total,created:new Date().toISOString()};
+ localStorage.setItem("hamburgInternationalBooking",JSON.stringify(state.booking));showConfirmation();
 }
 function showConfirmation(){
- setSteps(4);document.getElementById("modalTitle").textContent="Booking confirmed";
- document.getElementById("modalBody").innerHTML=`<div class="confirm"><div class="check">✓</div><h2>Your Hamburg International trip is ready.</h2><p class="muted">Your virtual booking has been saved in this browser.</p><div class="ref">${state.booking.ref}</div><p class="muted">${state.booking.route.num} · HAM → ${state.booking.route.code} · ${state.booking.cabin}</p><div class="actions" style="justify-content:center"><button class="primary" onclick="showBoarding()">View boarding pass</button><button class="secondary" style="color:var(--ink);border-color:var(--line);background:#fff" onclick="closeModal()">Return home</button></div></div>`;
+ setStep(6);$("modalTitle").textContent="Booking confirmed";
+ let b=state.booking;
+ $("body").innerHTML=`<div class="confirm"><div class="check">✓</div><h2>Your virtual journey is confirmed.</h2><p class="muted">Your booking has been saved in this browser. The payment was simulated and nothing was charged.</p><div class="ref">${b.ref}</div><p class="muted">${b.route.num}-${b.variant} · VTBS → ${b.route.code} · ${b.cabin} · ${b.seats.join(", ")}</p><div class="reviewBox" style="max-width:650px;margin:22px auto;text-align:left"><h3>Trip summary</h3><p><strong>Route:</strong> Bangkok (VTBS) → ${b.route.to} (${b.route.code})</p><p><strong>Aircraft:</strong> ${b.route.type}</p><p><strong>Cabin:</strong> ${b.cabin}</p><p><strong>Passengers:</strong> ${b.passengers.length}</p><p><strong>Fare:</strong> ${money(b.total)} virtual</p><p><strong>Payment:</strong> Demo approved</p></div><div class="actions" style="justify-content:center"><button class="primary" onclick="showBoarding()">View boarding pass</button><button class="secondary" onclick="closeModal()">Return home</button></div></div>`;
 }
 function showBoarding(){
- setSteps(4);document.getElementById("modalTitle").textContent="Boarding pass";
- const b=state.booking;
- document.getElementById("modalBody").innerHTML=`<div class="boarding"><div><div class="label">Hamburg International</div><h2 style="margin:8px 0 25px">${b.route.to}</h2><div class="label">FROM</div><strong>HAM</strong><span style="padding:0 18px;color:#8fa1b1">→</span><strong>${b.route.code}</strong><p style="margin-top:22px">${b.route.num} · ${b.cabin} · Seat ${b.seats.join(", ")}</p></div><div style="display:grid;place-items:center;font-size:75px">▦</div></div><div style="margin-top:18px"><button class="primary" onclick="window.print()">Print boarding pass</button> <button class="secondary" style="color:var(--ink);border-color:var(--line);background:#fff" onclick="closeModal()">Close</button></div>`;
+ let b=state.booking;setStep(6);$("modalTitle").textContent="Virtual boarding pass";
+ $("body").innerHTML=`<div class="boarding"><div><div style="font-size:11px;color:#9db1c1;letter-spacing:.1em">HAMBURG INTERNATIONAL · VIRTUAL BOARDING PASS</div><h2 style="font-size:34px;margin:9px 0 25px">${b.route.to}</h2><div style="font-size:11px;color:#9db1c1">FROM</div><strong style="font-size:22px">VTBS</strong><span style="padding:0 17px;color:#8fa2b2">→</span><strong style="font-size:22px">${b.route.code}</strong><p style="margin-top:24px">${b.route.num}-${b.variant} · ${b.cabin} · Seat ${b.seats.join(", ")}</p><p style="color:#afc0cc">${b.route.type} · Booking ${b.ref}</p></div><div class="qr">▦</div></div><div style="display:flex;justify-content:center;gap:10px;margin-top:18px"><button class="primary" onclick="window.print()">Print pass</button><button class="secondary" onclick="closeModal()">Close</button></div>`;
 }
-function openManage(){openModal();document.getElementById("modalTitle").textContent="Manage booking";setSteps(1);document.getElementById("modalBody").innerHTML=`<div class="manage" style="padding:0"><p class="muted">Retrieve the booking saved on this browser.</p><div class="field"><label>BOOKING REFERENCE</label><input id="modalManageRef" placeholder="Example: HI7K2Q"></div><button class="primary" style="margin-top:12px" onclick="findModalBooking()">Find booking</button><div id="modalManageResult" style="margin-top:15px"></div></div>`}
-function findBooking(){
- const ref=document.getElementById("manageRef").value.trim().toUpperCase(),b=JSON.parse(localStorage.getItem("hamburgInternationalBooking")||"null");
- const el=document.getElementById("manageResult");
- if(b&&b.ref===ref)el.innerHTML=`<div class="notice">Booking found: <strong>${b.ref}</strong> · ${b.route.to} · ${b.cabin} · Seats ${b.seats.join(", ")}</div>`;
- else el.innerHTML=`<div class="notice">No matching booking was found in this browser.</div>`;
+function openManage(){
+ openModal();setStep(1);$("modalTitle").textContent="Manage booking";
+ $("body").innerHTML=`<div class="manage"><div class="notice">Like a real airline manage-booking page, use your booking reference to retrieve your virtual itinerary. This demo stores one booking in your browser.</div><div class="field"><label>BOOKING REFERENCE</label><input id="manageRef" placeholder="Example: HI7K2Q"></div><button class="primary" style="margin-top:12px" onclick="findManage()">Retrieve booking</button><div id="manageResult" style="margin-top:15px"></div></div>`;
 }
-function findModalBooking(){
- const ref=document.getElementById("modalManageRef").value.trim().toUpperCase(),b=JSON.parse(localStorage.getItem("hamburgInternationalBooking")||"null");
- const el=document.getElementById("modalManageResult");
- if(b&&b.ref===ref){state.booking=b;el.innerHTML=`<div class="notice">Booking found: <strong>${b.ref}</strong> · ${b.route.num} · HAM → ${b.route.code} · ${b.cabin} · Seats ${b.seats.join(", ")}</div><button class="primary" onclick="showBoarding()">View boarding pass</button>`}
- else el.innerHTML=`<div class="notice">No matching booking was found in this browser.</div>`;
+function findManage(){
+ let ref=$("manageRef").value.trim().toUpperCase(),b=JSON.parse(localStorage.getItem("hamburgInternationalBooking")||"null"),el=$("manageResult");
+ if(b&&b.ref===ref){state.booking=b;el.innerHTML=`<div class="reviewBox"><h3>Booking found · ${b.ref}</h3><p>${b.route.num}-${b.variant} · VTBS → ${b.route.code}</p><p>${b.cabin} · Seats ${b.seats.join(", ")}</p><p>${b.passengers.length} passenger${b.passengers.length>1?"s":""} · ${money(b.total)} virtual</p><button class="primary" onclick="showBoarding()">View boarding pass</button></div>`}else el.innerHTML=`<div class="notice">No matching booking was found in this browser.</div>`;
 }
-function help(){alert("Hamburg International is a fictional Roblox virtual airline website. Bookings are saved locally in your browser. Do not enter passwords or payment information.");}
-document.getElementById("quickDate").valueAsDate=new Date();
+function showHelp(){alert("Hamburg International is a fictional Roblox airline. Bookings are saved only in this browser. Payment is a simulated demo. Never enter passwords or real financial information.")}
+fillDestinations();
+let now=new Date(),tomorrow=new Date(now.getTime()+86400000);
+$("searchDate").valueAsDate=tomorrow;
+let ret=new Date(now.getTime()+7*86400000);$("returnDate").valueAsDate=ret;
 </script>
 </body>
 </html>
